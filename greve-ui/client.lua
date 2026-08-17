@@ -1,15 +1,14 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-
-function Show(title, content)
+function Show(title, content, position)
     SendNUIMessage({
         action = "open",
         title = title,
-        content = content
+        content = content,
+        position = position,
     })
 end
 
 function Close()
-    print("[J0M1D4R] Closing NUI")
+    print(_('closing_nui'))
     SendNUIMessage({
         action = "close",
     })
@@ -25,15 +24,14 @@ RegisterCommand('open', function(source, args, rawCommand)
         return
     end
 
-    print(args[1])
-    print("[J0M1D4R] Opening UI with title: " .. args[1] .. ", content: " .. args[2])
+    print(_('opening_nui', args[1], args[2]))
 
     -- Assuming Show is a function defined elsewhere in your script
-    Show(args[1], args[2])
+    Show(args[1], args[2], args[3])
 end)
 
 
 RegisterCommand('close', function(source, args, RawCommand)
-    print("[J0M1D4R] Closing NUI")
+    print(_('closing_nui'))
     Close()
 end)
